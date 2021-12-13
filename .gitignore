@@ -126,3 +126,6 @@ data
 
 # HF
 .lock
+
+# custom
+run.sh
