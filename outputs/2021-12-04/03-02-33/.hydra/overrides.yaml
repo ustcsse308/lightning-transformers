@@ -1,0 +1,11 @@
+- task=nlp/text_classification
+- dataset.cfg.train_file=/bdata1/pc/github/private/lightning-transformers/data/train.json
+- dataset.cfg.validation_file=/bdata1/pc/github/private/lightning-transformers/data/valid.json
+- dataset.cfg.test_file=/bdata1/pc/github/private/lightning-transformers/data/test.json
+- backbone.pretrained_model_name_or_path=hfl/chinese-roberta-wwm-ext
+- trainer.precision=16
+- trainer.gpus=[2,3]
+- trainer.max_epochs=40
+- log=True
+- +auto_scale_batch_size=True
+- +trainer/logger=tensorboard
