@@ -1,0 +1,104 @@
+dataset:
+  _target_: lightning_transformers.task.nlp.text_classification.TextClassificationDataModule
+  cfg:
+    batch_size: ${training.batch_size}
+    num_workers: ${training.num_workers}
+    dataset_name: null
+    dataset_config_name: null
+    train_file: /bdata1/pc/github/private/lightning-transformers/data/stratified_5_flod_without_country/fold_0/train.json
+    validation_file: /bdata1/pc/github/private/lightning-transformers/data/stratified_5_flod_without_country/fold_0/test.json
+    test_file: /bdata1/pc/github/private/lightning-transformers/data/stratified_5_flod_without_country/fold_0/test.json
+    train_val_split: null
+    max_samples: null
+    cache_dir: null
+    padding: max_length
+    truncation: only_first
+    preprocessing_num_workers: 4
+    load_from_cache_file: true
+    max_length: 168
+    limit_train_samples: null
+    limit_val_samples: null
+    limit_test_samples: null
+task:
+  _recursive_: false
+  _target_: lightning_transformers.task.nlp..text_classification.TextClassificationTransformer
+  optimizer: ${optimizer}
+  scheduler: ${scheduler}
+  backbone: ${backbone}
+  downstream_model_type: transformers.AutoModelForSequenceClassification
+tokenizer:
+  _target_: transformers.AutoTokenizer.from_pretrained
+  pretrained_model_name_or_path: ${backbone.pretrained_model_name_or_path}
+  use_fast: true
+backbone:
+  pretrained_model_name_or_path: hfl/chinese-roberta-wwm-ext
+optimizer:
+  _target_: torch.optim.AdamW
+  lr: ${training.lr}
+  weight_decay: 0.001
+scheduler:
+  _target_: transformers.get_linear_schedule_with_warmup
+  num_training_steps: -1
+  num_warmup_steps: 0.1
+training:
+  run_test_after_fit: true
+  lr: 5.0e-05
+  output_dir: .
+  batch_size: 16
+  num_workers: 16
+trainer:
+  _target_: pytorch_lightning.Trainer
+  logger:
+    _target_: pytorch_lightning.loggers.TensorBoardLogger
+    save_dir: logs/
+  checkpoint_callback: true
+  callbacks: null
+  default_root_dir: null
+  gradient_clip_val: 0.0
+  process_position: 0
+  num_nodes: 1
+  num_processes: 1
+  gpus:
+  - 0
+  - 1
+  auto_select_gpus: false
+  tpu_cores: null
+  log_gpu_memory: null
+  progress_bar_refresh_rate: 1
+  overfit_batches: 0.0
+  track_grad_norm: -1
+  check_val_every_n_epoch: 1
+  fast_dev_run: false
+  accumulate_grad_batches: 1
+  max_epochs: 50
+  min_epochs: 1
+  max_steps: null
+  min_steps: null
+  limit_train_batches: 1.0
+  limit_val_batches: 1.0
+  limit_test_batches: 1.0
+  val_check_interval: 1.0
+  flush_logs_every_n_steps: 100
+  log_every_n_steps: 50
+  accelerator: ddp
+  sync_batchnorm: false
+  precision: 16
+  weights_summary: top
+  weights_save_path: null
+  num_sanity_val_steps: 2
+  resume_from_checkpoint: null
+  profiler: null
+  benchmark: false
+  deterministic: false
+  auto_lr_find: false
+  replace_sampler_ddp: true
+  terminate_on_nan: false
+  auto_scale_batch_size: false
+  prepare_data_per_node: true
+  plugins: null
+  amp_backend: native
+  move_metrics_to_cpu: false
+experiment_name: ${now:%Y-%m-%d}_${now:%H-%M-%S}
+log: true
+ignore_warnings: true
+auto_scale_batch_size: true

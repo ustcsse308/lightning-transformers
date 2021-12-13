@@ -1,0 +1,15 @@
+backbone:
+  pretrained_model_name_or_path: hfl/chinese-roberta-wwm-ext
+downstream_model_type: transformers.AutoModelForSequenceClassification
+instantiator: !!python/object:lightning_transformers.core.instantiator.HydraInstantiator {}
+num_labels: 3
+optimizer:
+  _target_: torch.optim.AdamW
+  lr: 5.0e-05
+  weight_decay: 0.001
+pipeline_kwargs: null
+scheduler:
+  _target_: transformers.get_linear_schedule_with_warmup
+  num_training_steps: -1
+  num_warmup_steps: 0.1
+tokenizer: null
