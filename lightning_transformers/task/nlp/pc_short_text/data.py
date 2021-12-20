@@ -26,7 +26,7 @@ class TextClassificationDataModule(HFDataModule):
         input_feature_fields = [k for k, v in dataset["train"].features.items() if k not in ["label", "idx"]]
         dataset = TextClassificationDataModule.preprocess(
             dataset,
-            tokenizer=self.tokenizer, 
+            tokenizer=self.tokenizer,
             input_feature_fields=input_feature_fields,
             padding=self.cfg.padding,
             truncation=self.cfg.truncation,
@@ -67,7 +67,6 @@ class TextClassificationDataModule(HFDataModule):
     @staticmethod
     def preprocess(ds: Dataset, **fn_kwargs) -> Dataset:
         ds = ds.map(
-            # todo: change this to self.convert_to_features for users to override
             TextClassificationDataModule.convert_to_features,
             batched=True,
             with_indices=True,
