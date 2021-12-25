@@ -122,6 +122,7 @@ lightning_logs
 .*_submit.py
 checkpoints
 data
+outputs
 
 # HF
 .lock

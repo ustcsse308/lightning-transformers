@@ -1,0 +1,14 @@
+- task=nlp/text_classification
+- dataset.cfg.train_file=/bdata1/pc/github/private/lightning-transformers/data/policy_level/experiment_02/train.json
+- dataset.cfg.validation_file=/bdata1/pc/github/private/lightning-transformers/data/policy_level/experiment_02/test.json
+- dataset.cfg.test_file=/bdata1/pc/github/private/lightning-transformers/data/policy_level/experiment_02/test.json
+- dataset.cfg.max_length=224
+- dataset.cfg.truncation=only_second
+- backbone.pretrained_model_name_or_path=hfl/chinese-roberta-wwm-ext
+- trainer.precision=16
+- trainer.gpus=4
+- trainer.max_epochs=40
+- training.num_workers=16
+- +trainer/logger=tensorboard
+- +auto_scale_batch_size=True
+- log=True

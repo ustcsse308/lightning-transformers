@@ -1,6 +1,6 @@
 hydra:
   run:
-    dir: outputs/${now:%Y-%m-%d}/${now:%H-%M-%S}
+    dir: /bdata1/pc/github/private/lightning-transformers/outputs/2021-12-04/03-02-33
   sweep:
     dir: multirun/${now:%Y-%m-%d}/${now:%H-%M-%S}
     subdir: ${hydra.job.num}
@@ -107,22 +107,24 @@ hydra:
   callbacks: {}
   output_subdir: .hydra
   overrides:
-    hydra: []
+    hydra:
+    - hydra.run.dir="/bdata1/pc/github/private/lightning-transformers/outputs/2021-12-04/03-02-33"
+    - hydra.job.name=train_ddp_process_1
     task:
     - task=nlp/text_classification
-    - dataset.cfg.train_file=/bdata1/pc/github/private/lightning-transformers/data/stratified_5_flod_without_country/fold_0/train.json
-    - dataset.cfg.validation_file=/bdata1/pc/github/private/lightning-transformers/data/stratified_5_flod_without_country/fold_0/test.json
-    - dataset.cfg.test_file=/bdata1/pc/github/private/lightning-transformers/data/stratified_5_flod_without_country/fold_0/test.json
+    - dataset.cfg.train_file=/bdata1/pc/github/private/lightning-transformers/data/train.json
+    - dataset.cfg.validation_file=/bdata1/pc/github/private/lightning-transformers/data/valid.json
+    - dataset.cfg.test_file=/bdata1/pc/github/private/lightning-transformers/data/test.json
     - backbone.pretrained_model_name_or_path=hfl/chinese-roberta-wwm-ext
     - trainer.precision=16
-    - trainer.gpus=[0,1]
-    - trainer.max_epochs=50
+    - trainer.gpus=[2,3]
+    - trainer.max_epochs=40
     - log=True
     - +auto_scale_batch_size=True
     - +trainer/logger=tensorboard
   job:
-    name: train
-    override_dirname: +auto_scale_batch_size=True,+trainer/logger=tensorboard,backbone.pretrained_model_name_or_path=hfl/chinese-roberta-wwm-ext,dataset.cfg.test_file=/bdata1/pc/github/private/lightning-transformers/data/stratified_5_flod_without_country/fold_0/test.json,dataset.cfg.train_file=/bdata1/pc/github/private/lightning-transformers/data/stratified_5_flod_without_country/fold_0/train.json,dataset.cfg.validation_file=/bdata1/pc/github/private/lightning-transformers/data/stratified_5_flod_without_country/fold_0/test.json,log=True,task=nlp/text_classification,trainer.gpus=[0,1],trainer.max_epochs=50,trainer.precision=16
+    name: train_ddp_process_1
+    override_dirname: +auto_scale_batch_size=True,+trainer/logger=tensorboard,backbone.pretrained_model_name_or_path=hfl/chinese-roberta-wwm-ext,dataset.cfg.test_file=/bdata1/pc/github/private/lightning-transformers/data/test.json,dataset.cfg.train_file=/bdata1/pc/github/private/lightning-transformers/data/train.json,dataset.cfg.validation_file=/bdata1/pc/github/private/lightning-transformers/data/valid.json,log=True,task=nlp/text_classification,trainer.gpus=[2,3],trainer.max_epochs=40,trainer.precision=16
     id: ???
     num: ???
     config_name: config

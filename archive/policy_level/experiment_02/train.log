@@ -1,0 +1,9 @@
+[2021-12-25 20:38:06,409][datasets.builder][WARNING] - Using custom data configuration default-3189d70b73166a5d
+[2021-12-25 20:38:06,411][datasets.builder][WARNING] - Reusing dataset json (/home/ywz/.cache/huggingface/datasets/json/default-3189d70b73166a5d/0.0.0/c2d554c3377ea79c7664b93dc65d0803b45e3279000f993c7bfd18937fd7f426)
+[2021-12-25 20:39:19,464][torch.distributed.distributed_c10d][INFO] - Added key: store_based_barrier_key:1 to store for rank: 0
+[2021-12-25 20:39:19,465][torch.distributed.distributed_c10d][INFO] - Rank 0: Completed store-based barrier for 4 nodes.
+[2021-12-25 22:21:49,506][datasets.builder][WARNING] - Using custom data configuration default-3189d70b73166a5d
+[2021-12-25 22:21:49,507][datasets.builder][WARNING] - Reusing dataset json (/home/ywz/.cache/huggingface/datasets/json/default-3189d70b73166a5d/0.0.0/c2d554c3377ea79c7664b93dc65d0803b45e3279000f993c7bfd18937fd7f426)
+[2021-12-25 22:21:57,639][datasets.arrow_dataset][WARNING] - Loading cached processed dataset at /home/ywz/.cache/huggingface/datasets/json/default-3189d70b73166a5d/0.0.0/c2d554c3377ea79c7664b93dc65d0803b45e3279000f993c7bfd18937fd7f426/cache-063cde0731ad53fe.arrow
+[2021-12-25 22:21:57,647][datasets.arrow_dataset][WARNING] - Loading cached processed dataset at /home/ywz/.cache/huggingface/datasets/json/default-3189d70b73166a5d/0.0.0/c2d554c3377ea79c7664b93dc65d0803b45e3279000f993c7bfd18937fd7f426/cache-7f1daf70279b1253.arrow
+[2021-12-25 22:21:57,658][datasets.arrow_dataset][WARNING] - Loading cached processed dataset at /home/ywz/.cache/huggingface/datasets/json/default-3189d70b73166a5d/0.0.0/c2d554c3377ea79c7664b93dc65d0803b45e3279000f993c7bfd18937fd7f426/cache-36430131d88e3a1a.arrow

@@ -5,17 +5,17 @@ dataset:
     num_workers: ${training.num_workers}
     dataset_name: null
     dataset_config_name: null
-    train_file: E:\ZacBi\Documents\GitHub\lightning-transformers/data/train.json
-    validation_file: E:\ZacBi\Documents\GitHub\lightning-transformers/data/valid.json
-    test_file: E:\ZacBi\Documents\GitHub\lightning-transformers/data/test.json
+    train_file: /bdata1/pc/github/private/lightning-transformers/data/policy_level/experiment_02/train.json
+    validation_file: /bdata1/pc/github/private/lightning-transformers/data/policy_level/experiment_02/test.json
+    test_file: /bdata1/pc/github/private/lightning-transformers/data/policy_level/experiment_02/test.json
     train_val_split: null
     max_samples: null
     cache_dir: null
     padding: max_length
-    truncation: only_first
+    truncation: only_second
     preprocessing_num_workers: 1
     load_from_cache_file: true
-    max_length: 128
+    max_length: 224
     limit_train_samples: null
     limit_val_samples: null
     limit_test_samples: null
@@ -58,7 +58,7 @@ trainer:
   process_position: 0
   num_nodes: 1
   num_processes: 1
-  gpus: 1
+  gpus: 4
   auto_select_gpus: false
   tpu_cores: null
   log_gpu_memory: null

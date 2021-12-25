@@ -1,2 +1,0 @@
-[2021-12-08 00:54:23,910][datasets.builder][WARNING] - Using custom data configuration default-1e425b879caca2b8
-[2021-12-08 00:54:24,231][datasets.packaged_modules.json.json][ERROR] - Failed to read file '/bdata1/pc/github/private/lightning-transformers/data/stratified_5_flod_without_country/fold_0/train.json' with error <class 'pyarrow.lib.ArrowInvalid'>: JSON parse error: Column() changed from object to array in row 0
