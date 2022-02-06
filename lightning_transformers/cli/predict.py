@@ -11,6 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import os
 from typing import Any, Dict, List, Mapping, Optional
 
 import hydra
@@ -21,6 +22,7 @@ from pytorch_lightning.utilities.distributed import rank_zero_info
 from lightning_transformers.core.config import TaskConfig
 from lightning_transformers.core.instantiator import HydraInstantiator, Instantiator
 from lightning_transformers.core.nlp import HFTokenizerConfig, HFTransformer
+from lightning_transformers.core.utils import extract_inputs_from_title
 
 
 def run(
@@ -37,15 +39,18 @@ def run(
     if checkpoint_path:
         model = get_class(task._target_).load_from_checkpoint(checkpoint_path)
     else:
-        model = instantiator.model(
-            task, model_data_kwargs=model_data_kwargs, tokenizer=tokenizer, pipeline_kwargs=pipeline_kwargs
-        )
+        model = instantiator.model(task,
+                                   model_data_kwargs=model_data_kwargs,
+                                   tokenizer=tokenizer,
+                                   pipeline_kwargs=pipeline_kwargs)
 
     predict_kwargs = predict_kwargs or {}
-    if isinstance(x, Mapping):
+    if os.path.isfile(x):
+        return model.hf_predict(extract_inputs_from_title(x),
+                                **predict_kwargs)
+    elif isinstance(x, Mapping):
         return model.hf_predict(**x, **predict_kwargs)
-    else:
-        return model.hf_predict(x, **predict_kwargs)
+    return model.hf_predict(x, **predict_kwargs)
 
 
 def main(cfg: DictConfig) -> Any:

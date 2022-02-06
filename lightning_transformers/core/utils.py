@@ -11,7 +11,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import json
 import os
+from typing import AnyStr
 import warnings
 
 
@@ -19,3 +21,20 @@ def set_ignore_warnings():
     warnings.simplefilter("ignore")
     # set os environ variable for multiprocesses
     os.environ["PYTHONWARNINGS"] = "ignore"
+
+
+def extract_inputs_from_title(fpath: AnyStr):
+    """Get inputs from file with key field title and department
+
+    Args:
+        fpath (AnyStr): file path
+
+    Returns:
+        List[AnyStr]: inputs for model
+    """
+    inputs = []
+    with open(fpath, 'r', encoding='utf8') as fobj:
+        for line in fobj:
+            jobj = json.loads(line)
+            inputs.append(jobj['title'] + " ".join(jobj['department'].split()))
+    return inputs
