@@ -128,4 +128,4 @@ outputs
 .lock
 
 # custom
-run.sh
+scripts/
