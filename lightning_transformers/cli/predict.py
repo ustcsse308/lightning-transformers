@@ -37,7 +37,8 @@ def run(
 ) -> List[Dict[str, Any]]:
     model: HFTransformer
     if checkpoint_path:
-        model = get_class(task._target_).load_from_checkpoint(checkpoint_path)
+        model = get_class(task._target_).load_from_checkpoint(
+            checkpoint_path, hf_pipeline_kwargs=pipeline_kwargs)
     else:
         model = instantiator.model(task,
                                    model_data_kwargs=model_data_kwargs,
@@ -46,9 +47,8 @@ def run(
 
     predict_kwargs = predict_kwargs or {}
     if os.path.isfile(x):
-        return model.hf_predict(extract_inputs_from_title(x),
-                                **predict_kwargs)
-    elif isinstance(x, Mapping):
+        return model.hf_predict(extract_inputs_from_title(x), **predict_kwargs)
+    if isinstance(x, Mapping):
         return model.hf_predict(**x, **predict_kwargs)
     return model.hf_predict(x, **predict_kwargs)
 
