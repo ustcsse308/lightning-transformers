@@ -59,7 +59,7 @@ class HFDataModule(TokenizerDataModule):
             )
 
         # Load straight from data files
-        elif self.cfg.datafiles:
+        elif self.cfg.train_file:
             extension = self.cfg.train_file.split(".")[-1]
             dataset = load_dataset(extension, data_files=data_files)
 
